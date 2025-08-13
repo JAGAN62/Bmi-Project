@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h2>BMI Calculator</h2>
+        <p class="close" title="close">X</p>
+        <form method="POST">
+            <input type="text" name="weight" onclick="clearInput()" placeholder="Weight (kg)" >
+            <input type="text" name="height" placeholder="Height (m)" >
+            <button type="submit">Calculate</button>
+        </form>
+         <script>
+            document.querySelector('.close').addEventListener('click',()=>{
+                document.querySelector('.container').style.display='none';
+            })
+
+            function clearInput(){
+                document.getElementsByTagName('main')[0].style.display="none";
+            }
+         </script>
+         <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if bmi %}
+            <div class="result">
+                <p>Your BMI: <strong>{{ "%.2f"|format(bmi) }}</strong></p>
+                <p>Category: <strong>{{ category }}</strong></p>
+            </div>
+        {% endif %}
+         </main>
+    </div>
+</body>
+</html>
